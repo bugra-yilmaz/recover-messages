@@ -82,7 +82,7 @@ class Trigram(object):
         return self.unigram_counts.predict(None)
 
 
-def get_trigram_model(training_dataset='data/train.csv'):
+def get_trained_trigram_model(training_dataset='data/train.csv'):
     training_sentences = get_training_sentences(training_dataset)
     trigram_model = Trigram()
     trigram_model.train(training_sentences)
