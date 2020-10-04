@@ -3,8 +3,6 @@ In this project, I aimed to recover hidden characters in the given chatbot dialo
 
 In the given training set, there are ```2543``` complete sentences extacted from chatbot dialogues. With the machine learning algorithms it is possible to learn patterns from given sentences and to recover hidden last character in the given test set, which consists of ```379``` uncomplete sentences.
 
-<br/>
-
   * [Requirements](#requirements)
   * [Data Preprocessing](#data-preprocessing)
   * [Trigram Character Model](#trigram-character-model)
