@@ -87,6 +87,17 @@ class Trigram(object):
 
         return self.unigram_counts.predict(None)
 
+    # Evaluates the model on a given test set, returns the accuracy
+    def evaluate(self, x_test, y_test):
+        count = 0
+        for i, test_sentence in enumerate(x_test):
+            test_sequence = test_sentence.split()[-2:]
+            prediction = self.predict(test_sequence)
+            if prediction == y_test[i]:
+                count += 1
+
+        return count/len(x_test)
+
 
 # Returns the pre-trained trigram language model
 def get_trained_trigram_model(training_dataset='data/train.csv', only_last_ngrams=False):
