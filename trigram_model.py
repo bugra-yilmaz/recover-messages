@@ -1,4 +1,5 @@
 from collections import Counter
+from data_preprocessing import get_training_sentences
 
 
 # Single n-gram object that stores observed n-gram counts and predicts the most probable token
@@ -79,3 +80,11 @@ class Trigram(object):
             return self.bigram_counts.predict(sequence[1:])
 
         return self.unigram_counts.predict(None)
+
+
+def get_trigram_model(training_dataset='data/train.csv'):
+    training_sentences = get_training_sentences(training_dataset)
+    trigram_model = Trigram()
+    trigram_model.train(training_sentences)
+
+    return trigram_model
