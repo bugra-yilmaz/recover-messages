@@ -8,7 +8,7 @@ In the given training set, there are ```2543``` complete sentences extacted from
   * [Requirements](#requirements)
   * [Data Preprocessing](#data-preprocessing)
   * [Trigram Character Model](#trigram-character-model)
-  * [RNN Models](#rnn-models)
+  * [RNN Model](#rnn-model)
   * [Results](#results)
   * [Further Work](#further-work)
 
@@ -29,12 +29,12 @@ The first algorithm I used to learn patterns in the given chatbot sentences is t
 
 No external library is used to count ngrams and calculating possibilites. A simple backoff logic is implemented to generate predictions in case of missing trigrams (and probably some missing bigrams) in training sentences. Also, since the test set contains sentences with only the last characters missing, there is an option to count only the last ngrams in the sentences of training set while training the ngram model. In **trigram_models.py**, necessary tools to count ngrams and to create trigram character models are implemented. Pre-trained trigram character model is also available in this module.  Results obtained using trigram models can be found in the [Results](#results) section. 
 
-## RNN Models
+## RNN Model
 In order to investigate more complex patterns in the given chatbot sentences, I used recurrent neural networks. Although the training set includes only ```2543``` sentences, it is possible to train RNN models to gain higher accuracies compared to trigram character models. To create RNN models, deep learning library ```Keras``` (running on top of ```TensorFlow```) is used.  
 
 I also created a hyperparameter tuning script for RNN models to determine the best architecture needed in this project. In **tune_rnn_params.py**, I utilized ```GridSearchCV``` tool of ```scikit-learn``` library to tune parameters such as embedding size (used in the embedding layer of RNN), RNN unit size, gradient descent optimizers, RNN type (GRUs and LSTMs) etc. Resulting best parameter combination and the RNN model trained with the resulting configuration is available in **rnn_best_params.pkl** and **rnn_model.h5** respectively. To extend the parameter search and look for better architecures, it will be enough to add new options in the hyperparameter tuning script and run the following:
 ```
-pythun tune_rnn_params.py
+python tune_rnn_params.py
 ``` 
 
 After the search is finished, new best parameter combination and corresponding (trained) RNN model will be available in the same filepaths.
@@ -47,12 +47,11 @@ To reproduce the results obtained with the models explained above, simply run:
 ```
 python test_models.py
 ```
-<br>
 
 Surprisingly, simple trigram character models can reach accuracies above ```60%``` on the test sentences. Also, counting only the last ngrams in the training sentences apperas to improve the accuracy significantly. Thus, it can be discussed that patterns seen in the first part of the chatbot sentences do not provide so much information about the last characters. Following results are obtained with trigram character models:
 ```
-Accuracy of standard trigram character model on the test set: 0.62
-Accuracy of trigram character model on the test set when trained only on last ngrams: 0.731
+Accuracy of standard trigram character model on test set: 0.62
+Accuracy of trigram character model on test set when trained only on last ngrams: 0.731
 ```
 <br>
 
@@ -72,10 +71,10 @@ With recurrent neural networks, following parameter combination appeared to be t
 
 In the plots below, more details about the training history of RNN model with the given architecture are available.
 Training accuracies:
-![accuracies](plot/rnn_accuracy.png)
+![accuracies](plots/rnn_accuracy.png)
 <br>
 Training losses:
-![accuracies](plot/rnn_loss.png)
+![accuracies](plots/rnn_loss.png)
 <br>
 
 Following result is obtained with the given RNN model:
