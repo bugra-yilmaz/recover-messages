@@ -1,5 +1,6 @@
 import os
 from keras.layers import Dense
+from keras.layers import Dropout
 from keras.layers import SimpleRNN
 from keras.models import Sequential
 from keras.models import load_model
@@ -8,18 +9,23 @@ from keras.layers.embeddings import Embedding
 
 
 # Builds a simple RNN model with the given parameters
-def build_rnn_model(embedding_size=64, rnn_units=32):
+def build_rnn_model(embedding_size=64, rnn_units=32, optimizer='adam', rnn_type=SimpleRNN,
+                    model_depth=1, dropout_rate=0):
     rnn_model = Sequential()
     rnn_model.add(Embedding(input_dim=33, output_dim=embedding_size, input_length=8))
-    rnn_model.add(SimpleRNN(units=rnn_units))
+    rnn_model.add(Dropout(rate=dropout_rate))
+    for i in range(1, model_depth):
+        rnn_model.add(rnn_type(units=rnn_units, dropout=dropout_rate, recurrent_dropout=dropout_rate, return_sequences=True))
+    rnn_model.add(rnn_type(units=rnn_units, dropout=dropout_rate, recurrent_dropout=dropout_rate))
+    rnn_model.add(Dropout(rate=dropout_rate))
     rnn_model.add(Dense(units=33, activation='softmax'))
-    rnn_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    rnn_model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     return rnn_model
 
 
 # Trains the RNN model with given parameters and saves it into a .h5 file
-def train_rnn_model(model_params, epochs=30, batch_size=32, model_path='rnn_model.h5'):
+def train_rnn_model(model_params, epochs, batch_size, model_path='rnn_model.h5'):
     rnn_data = get_rnn_data()
     x_train, y_train = rnn_data[0], rnn_data[1]
 
