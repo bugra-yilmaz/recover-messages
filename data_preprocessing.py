@@ -14,7 +14,7 @@ def get_test_sentences(file_path='data/hidden.csv'):
     test_sentences = list()
     with open(file_path, 'r') as f:
         for line in f.read().splitlines():
-            sentence = ' '.join(list(line))
+            sentence = ' '.join(list(line)[:-1])
             test_sentences.append(sentence)
 
     return test_sentences
