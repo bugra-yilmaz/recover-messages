@@ -71,9 +71,11 @@ With recurrent neural networks, following parameter combination appeared to be t
 
 In the plots below, more details about the training history of RNN model with the given architecture are available.
 Training accuracies:
+<br>
 ![accuracies](plots/rnn_accuracy.png)
 <br>
 Training losses:
+<br>
 ![accuracies](plots/rnn_loss.png)
 <br>
 
