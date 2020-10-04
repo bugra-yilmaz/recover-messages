@@ -55,10 +55,16 @@ class Trigram(object):
 
     # Trains the trigram model with the given training sentences
     # Assumes that tokens are separated with spaces in the given sentences
-    def train(self, training_sentences):
+    def train(self, training_sentences, only_last_ngrams=False):
         for sentence in training_sentences:
             characters = sentence.split()
-            for i in range(len(characters)):
+
+            if only_last_ngrams:
+                starting_index = len(characters) - 1
+            else:
+                starting_index = 0
+
+            for i in range(starting_index, len(characters)):
                 unigram = characters[i]
                 bigram = tuple(characters[i - 1:i + 1])
                 trigram = tuple(characters[i - 2:i + 1])
@@ -82,9 +88,10 @@ class Trigram(object):
         return self.unigram_counts.predict(None)
 
 
-def get_trained_trigram_model(training_dataset='data/train.csv'):
+# Returns the pre-trained trigram language model
+def get_trained_trigram_model(training_dataset='data/train.csv', only_last_ngrams=False):
     training_sentences = get_training_sentences(training_dataset)
     trigram_model = Trigram()
-    trigram_model.train(training_sentences)
+    trigram_model.train(training_sentences, only_last_ngrams)
 
     return trigram_model
