@@ -2,7 +2,7 @@
 
 Sequence classification with n-gram and RNN-based models.
 
-Here the goal is to predict hidden characters in chatbot dialogues.
+Here, the goal is to predict hidden characters in chatbot dialogues.
 
 In the training set, there are ```2543``` complete sentences extacted from chatbot dialogues. With machine learning algorithms, one can identify the patterns in the seemingly nonsense sequences and recover the hidden last character for the test set, which consists of ```379``` uncomplete sequences.
 
