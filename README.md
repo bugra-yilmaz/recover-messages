@@ -87,7 +87,7 @@ It is obvious that RNN model performed better on the test set compared to trigra
 
 However, surprisingly, the RNN model reaches a lower accuracy on the training set compared to test set. This shows that the given test set might not represent a generic result and it might contain easier patterns than the training set. Due to the low sample size in the test set, it is hard to make assumptions. But, a simple investigation reveals that test set contains only ```13``` different classes to be predicted as the hidden last character of the sequence, out of ```33``` available classes. Thus, it can be said that the test set is highly unbalanced (training set includes ```31``` different characters out of ```33```). This might be the main reason behind this discrepancy.
 
-## Further Work
+## Further work
 - Extending hyperparameter search.
 - Train RNN models with shorter length inputs.
 - Increase the sample size.
