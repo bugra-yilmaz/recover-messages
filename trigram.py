@@ -1,5 +1,5 @@
 from collections import Counter
-from data_preprocessing import get_training_sentences
+from preprocessing import get_training_sentences
 
 
 # Single n-gram object that stores observed n-gram counts and predicts the most probable token

@@ -1,6 +1,6 @@
 from numpy import array
-from keras.preprocessing.text import Tokenizer
-from keras.utils import to_categorical
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.utils import to_categorical
 
 
 # Returns the list of training sentences in the original form

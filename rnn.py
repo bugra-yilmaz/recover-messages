@@ -1,11 +1,11 @@
 import os
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import GRU
-from keras.models import Sequential
-from keras.models import load_model
-from data_preprocessing import get_rnn_data
-from keras.layers.embeddings import Embedding
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import GRU
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import load_model
+from preprocessing import get_rnn_data
+from tensorflow.keras.layers import Embedding
 
 
 # Builds a simple RNN model with the given parameters
@@ -25,7 +25,7 @@ def build_rnn_model(embedding_size=64, rnn_units=32, optimizer='adam', rnn_type=
 
 
 # Trains the RNN model with given parameters and saves it into a .h5 file, returns training history
-def train_rnn_model(model_params, epochs, batch_size, model_path='rnn_model.h5'):
+def train_rnn_model(model_params, epochs, batch_size, model_path='output/rnn_model.h5'):
     rnn_data = get_rnn_data()
     x_train, y_train = rnn_data[0], rnn_data[1]
 
@@ -39,7 +39,7 @@ def train_rnn_model(model_params, epochs, batch_size, model_path='rnn_model.h5')
 
 
 # Returns the pre-trained model from existing .h5 file if the file exists
-def get_trained_rnn_model(model_path='rnn_model.h5'):
+def get_trained_rnn_model(model_path='output/rnn_model.h5'):
     if os.path.exists(model_path):
         rnn_model = load_model(model_path)
         return rnn_model
